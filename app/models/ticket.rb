@@ -2,6 +2,8 @@ class Ticket < ApplicationRecord
   validates :barcode, presence: true, uniqueness: true
   after_initialize :generate_barcode, :if => :new_record?
   enum payment_option: [:credit_card, :debit_card, :cash]
+  PARKING_CAPACITY = 54
+  scope :free_spaces, -> { PARKING_CAPACITY - where("status = 'unpaid'").count }
 
   def generate_barcode
     unless self.valid?
@@ -27,5 +29,10 @@ class Ticket < ApplicationRecord
       self.status = 'unpaid'
       save
     end
+  end
+
+  def is_space_available?
+    errors.add(:base, 'No Space left in parking lot') if self.class.free_spaces == 0
+    self.class.free_spaces > 0
   end
 end

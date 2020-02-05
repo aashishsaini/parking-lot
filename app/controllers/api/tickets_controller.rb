@@ -8,7 +8,7 @@ class Api::TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new
-    if @ticket.save
+    if @ticket.is_space_available? && @ticket.save
       render json: @ticket
     else
       render json: {error: @ticket.errors.full_messages.join(',')}
@@ -37,6 +37,10 @@ class Api::TicketsController < ApplicationController
   def state
     @ticket.exit_check
     render json: @ticket.status
+  end
+
+  def free_spaces
+    render json: Ticket.free_spaces
   end
 
   private
