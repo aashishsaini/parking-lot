@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_194950) do
+ActiveRecord::Schema.define(version: 2020_02_05_212315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2020_02_05_194950) do
     t.string "barcode", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "unpaid", null: false
+    t.integer "payment_option"
+    t.datetime "payment_time"
     t.index ["barcode"], name: "index_tickets_on_barcode", unique: true
   end
 
