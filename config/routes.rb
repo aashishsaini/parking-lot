@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :tickets, only: [:index, :create, :show] do
       member do
         post :payments
+        get :state
       end
     end
   end

@@ -20,4 +20,12 @@ class Ticket < ApplicationRecord
     (parked_time += 1) if parked_time == 0
     "€#{parked_time*2}"
   end
+
+  def exit_check
+    if self.status == 'paid' && (((Time.now - self.payment_time)/15.minutes) > 1)
+      self.created_at = payment_time
+      self.status = 'unpaid'
+      save
+    end
+  end
 end

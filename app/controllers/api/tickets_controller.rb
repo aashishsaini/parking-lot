@@ -1,5 +1,5 @@
 class Api::TicketsController < ApplicationController
-  before_action :get_ticket, only: [:show, :payments]
+  before_action :get_ticket, only: [:show, :payments, :state]
 
   def index
     @tickets = Ticket.all
@@ -32,6 +32,11 @@ class Api::TicketsController < ApplicationController
     else
       render json: {error: 'Unable to make payment'}
     end
+  end
+
+  def state
+    @ticket.exit_check
+    render json: @ticket.status
   end
 
   private
