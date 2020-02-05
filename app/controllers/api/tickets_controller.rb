@@ -39,10 +39,6 @@ class Api::TicketsController < ApplicationController
     render json: @ticket.status
   end
 
-  def free_spaces
-    render json: Ticket.free_spaces
-  end
-
   private
   def get_ticket
     @ticket = Ticket.find_by(barcode: params[:id])

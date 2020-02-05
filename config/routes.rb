@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         get :state
       end
     end
-    get 'free-spaces' => 'tickets#free_spaces'
   end
+  get 'api/free-spaces' => 'application#free_spaces'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
