@@ -46,6 +46,5 @@ class Api::TicketsController < ApplicationController
   private
   def get_ticket
     @ticket = Ticket.find_by(barcode: params[:id])
-    @ticket ||= Ticket.find_by(id: params[:id])
   end
 end
