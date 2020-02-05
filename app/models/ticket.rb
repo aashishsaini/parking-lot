@@ -12,4 +12,10 @@ class Ticket < ApplicationRecord
   def assign_barcode
     self.barcode = SecureRandom.hex(8)
   end
+
+  def calc_ticket_price
+    parked_time = ((Time.now - self.created_at)/1.hour).round
+    (parked_time += 1) if parked_time == 0
+    "€#{parked_time*2}"
+  end
 end
