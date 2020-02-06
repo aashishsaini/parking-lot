@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :tickets, only: [:index, :create, :show] do
+    resources :tickets, only: [:create, :show] do
       member do
         post :payments
         get :state

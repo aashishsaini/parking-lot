@@ -1,11 +1,6 @@
 class Api::TicketsController < ApplicationController
   before_action :get_ticket, only: [:show, :payments, :state]
 
-  def index
-    @tickets = Ticket.all
-    render json: @tickets
-  end
-
   def create
     @ticket = Ticket.new
     if @ticket.is_space_available? && @ticket.save
